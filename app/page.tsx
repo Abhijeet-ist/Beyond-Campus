@@ -312,7 +312,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[...Array(8)].map((_, index) => (
+              {[...Array(6)].map((_, index) => (
           <div
             key={index}
             className={cn(
