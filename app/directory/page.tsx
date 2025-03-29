@@ -29,6 +29,10 @@ interface AlumniProfile {
     linkedin?: string
     twitter?: string
     website?: string
+    instgram?: string
+    facebook?: string
+    github?: string
+    link?: string
   }
 }
 
@@ -44,7 +48,7 @@ const ALUMNI_DATA: AlumniProfile[] = [
     company: "Google",
     location: "San Francisco, CA",
     industry: "Technology",
-    bio: "Sarah is a product leader with expertise in AI and machine learning applications. After graduating, she joined a startup before moving to Google where she now leads a team developing innovative search features.",
+    bio: "Sarah is a product leader with expertise in AI and machine learning applications. After graduating, she joined a startup before moving to Google where she now leads a team developing innovative search features. Sarah is a product leader with expertise in AI and machine learning applications. After graduating, she joined a startup before moving to Google where she now leads a team developing innovative search features.Sarah is a product leader with expertise in AI and machine learning applications. After graduating, she joined a startup before moving to Google where she now leads a team developing innovative search features.Sarah is a product leader with expertise in AI and machine learning applications. After graduating, she joined a startup before moving to Google where she now leads a team developing innovative search features.",
     social: {
       linkedin: "https://linkedin.com",
       twitter: "https://twitter.com",
@@ -475,8 +479,8 @@ export default function DirectoryPage() {
                 <p className="text-muted-foreground mb-6">{selectedProfile.bio}</p>
 
                 <div className="flex justify-end gap-3">
-                  <Button variant="outline">Message</Button>
-                  <Button className="gradient-primary">Connect</Button>
+                  {/* <Button variant="outline">Message</Button>
+                  <Button className="gradient-primary">Connect</Button> */}
                 </div>
               </div>
             </div>
