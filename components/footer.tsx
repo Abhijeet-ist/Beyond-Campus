@@ -19,22 +19,22 @@ export function Footer() {
               homecoming platform.
             </p>
             <div className="flex gap-4">
-              <Button variant="ghost" size="icon" className="rounded-full">
+                <Link href="https://facebook.com/LPUUniversity" target="_blank" rel="noopener noreferrer">
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
-              </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
+                </Link>
+                <Link href="https://x.com/lpuuniversity" target="_blank" rel="noopener noreferrer">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
-              </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
+                </Link>
+                <Link href="https://www.instagram.com/lpuuniversity/" target="_blank" rel="noopener noreferrer">
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
-              </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
+                </Link>
+                <Link href="https://www.linkedin.com/school/lovely-professional-university/" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
-              </Button>
+                </Link>
             </div>
           </div>
 
