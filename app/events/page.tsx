@@ -30,6 +30,7 @@ interface Event {
   image: string
   capacity: number
   registered: number
+  attendees?: string
   status: "upcoming" | "ongoing" | "past"
   category: "social" | "academic" | "networking" | "special"
 }
@@ -38,54 +39,55 @@ interface Event {
 const EVENTS_DATA: Event[] = [
   {
     id: "1",
-    title: "Welcome Reception",
-    date: "October 15, 2025",
-    time: "7:00 PM - 10:00 PM",
-    location: "Alumni Hall, Main Campus",
+    title: "One India-2024 Cultural Fest",
+    date: "April 18, 2024​",
+    time: "Throughout the Day",
+    location: "Main Campus",
     description:
-      "Kick off the homecoming weekend with cocktails, hors d'oeuvres, and reconnect with old friends in the beautifully renovated Alumni Hall. This casual reception is the perfect opportunity to break the ice and start the weekend's festivities.",
+      "The 12th edition of 'One India' transformed the campus into a vibrant tapestry of Indian culture and heritage. Embracing the theme \"Equality, Diversity, and Inclusivity,\" over 4,000 students from various states and union territories showcased festivals, rituals, dances, and songs, fostering a spirit of unity amidst diversity. The event featured 29 exhibition stalls and a 3 km-long cultural procession.",
     image: "/placeholder.svg?height=400&width=800",
     capacity: 200,
     registered: 145,
-    status: "upcoming",
+    attendees: "25,000+",
+    status: "past",
     category: "social",
   },
   {
     id: "2",
-    title: "Campus Tours",
-    date: "October 16, 2025",
-    time: "10:00 AM - 12:00 PM",
-    location: "Visitor Center, Main Campus",
+    title: "Spectra 2024 – Inter-School Youth Festival",
+    date: "November 11, 2024",
+    time: "Week-long event",
+    location: "LPU Campus​",
     description:
-      "Explore how your alma mater has evolved with guided tours of new facilities and renovated spaces. Tours will be led by current students and will include visits to the new Science Complex, Arts Center, and Athletic Facilities.",
+      "The 17th edition of 'Spectra' ignited the campus with vibrant expressions of youth talent and social consciousness. Thousands of students from over 25 disciplines participated in more than 30 competitions across music, dance, drama, visual arts, and technology. Performances addressed pressing social issues, blending art with activism and inspiring change.",
     image: "/placeholder.svg?height=400&width=800",
     capacity: 100,
     registered: 78,
     status: "upcoming",
-    category: "academic",
+    category: "social",
   },
   {
     id: "3",
-    title: "Industry Networking Lunch",
-    date: "October 16, 2025",
-    time: "12:30 PM - 2:30 PM",
-    location: "Business School Atrium",
+    title: "Magnitude 2024 – Intra-University Competition",
+    date: "November 6, 2024",
+    time: "Throughout the day",
+    location: "LPU Campus",
     description:
-      "Connect with fellow alumni in your industry during this structured networking lunch. Tables will be organized by industry sector, allowing for meaningful conversations and potential professional collaborations.",
+      "Magnitude 2024' provided a platform for students to exhibit creativity and innovation across categories like Literary, Technical, Fine Arts, Cultural, and Lifestyle. The event introduced a mentorship program with eight dynamic teams and featured competitions such as Soundscape, Voice of Magnitude, and Mag Gala. The grand finale was graced by renowned singer Swati Mishra.​",
     image: "/placeholder.svg?height=400&width=800",
     capacity: 150,
     registered: 132,
     status: "upcoming",
-    category: "networking",
+    category: "social",
   },
   {
     id: "4",
-    title: "Distinguished Alumni Panel",
-    date: "October 16, 2025",
-    time: "3:00 PM - 5:00 PM",
+    title: "Cognitia’25 – Annual Technical Fest",
+    date: "March 13, 2025",
+    time: "Three-day event",
     location: "University Auditorium",
     description:
-      "Hear from accomplished alumni as they share insights from their professional journeys and discuss how their university experience shaped their careers. Q&A session will follow the panel discussion.",
+      "Cognitia’25' celebrated technical challenges and innovations, featuring 14 specialized competitions. Highlights included 'Ignition Quest' (Model Rocketry Competition) and 'Aero Rush' (Drone Racing Competition). Over 450 teams showcased engineering prowess, problem-solving skills, and creative ingenuity.​ The event fostered collaboration and networking among students, faculty, and industry experts, making it a hub of knowledge exchange and inspiration.",
     image: "/placeholder.svg?height=400&width=800",
     capacity: 300,
     registered: 210,
@@ -94,49 +96,77 @@ const EVENTS_DATA: Event[] = [
   },
   {
     id: "5",
-    title: "Homecoming Gala Dinner",
-    date: "October 16, 2025",
+    title: "38th AIU Inter-University National Youth Festival",
+    date: "March 10, 2025",
     time: "7:00 PM - 11:00 PM",
-    location: "Grand Ballroom, Alumni Center",
+    location: "LPU Campus​",
     description:
-      "An elegant evening celebrating distinguished alumni and university achievements. The gala will feature a three-course dinner, live entertainment, and the presentation of the annual Alumni Achievement Awards.",
+      "LPU clinched the overall championship for the second consecutive year at this prestigious festival. The event saw participation from over 2,400 students representing 148 universities, competing in 28 events across theatre, music, literary, and fine arts categories. LPU's stellar performances earned 18 medals, including 10 golds. The festival was inaugurated by the Chief Minister of Punjab, Bhagwant Mann, and featured a grand cultural evening with performances by renowned artists.",
     image: "/placeholder.svg?height=400&width=800",
     capacity: 250,
     registered: 220,
     status: "upcoming",
-    category: "special",
+    category: "academic",
   },
   {
     id: "6",
-    title: "Alumni Sports Tournament",
-    date: "October 17, 2025",
-    time: "9:00 AM - 12:00 PM",
-    location: "University Sports Complex",
+    title: "Neo-International Conference on Habitable Environments (NICHE IPM-2023)",
+    date: "October 19, 2023",
+    time: "Two-day conference​",
+    location: "Shanti Devi Mittal Auditorium, LPU",
     description:
-      "Participate in friendly competition with fellow alumni in various sports including basketball, volleyball, and tennis. Teams will be formed on-site, and all skill levels are welcome to join.",
+      "The fifth edition of NICHE brought together over 25 global and national leaders in architecture from countries like the USA, UK, and Spain. The conference aimed to converge fields of planning, architecture, and design, fostering discussions on sustainable and habitable environments. The event featured keynote speeches, panel discussions, and workshops, providing a platform for knowledge exchange and collaboration among professionals and students.",
     image: "/placeholder.svg?height=400&width=800",
     capacity: 120,
     registered: 85,
     status: "upcoming",
-    category: "social",
+    category: "academic",
   },
   {
     id: "7",
-    title: "Homecoming Football Game",
-    date: "October 17, 2025",
-    time: "2:00 PM - 5:00 PM",
-    location: "University Stadium",
+    title: "Annual NASA Convention 2023",
+    date: "June 9 to 12, 2023​",
+    time: "Four-day event",
+    location: "LPU Campus",
     description:
-      "Cheer on the university team as they take on their rivals in the annual homecoming football game. Special seating section reserved for alumni attendees. Pre-game tailgate included with registration.",
+      "LPU had the honor of hosting the 65th Annual NASA (National Association of Students of Architecture) Convention, a prestigious gathering that brought together architecture students and professionals from across the nation. The convention featured a series of workshops, lectures by eminent architects, design competitions, and exhibitions, fostering a collaborative environment for innovation and learning in the field of architecture. The event aimed to inspire and empower the next generation of architects, encouraging them to explore new ideas and approaches in design and sustainability.",
     image: "/placeholder.svg?height=400&width=800",
     capacity: 500,
     registered: 450,
     status: "upcoming",
-    category: "special",
+    category: "networking",
   },
   {
     id: "8",
-    title: "Farewell Brunch",
+    title: "NOSPlan Convention 2025 - National Conference on Sustainable Planning",
+    date: "January 10, 2025",
+    time: "Three-day convention",
+    location: "LPU Campus​",
+    description:
+      " Hosting the 26th Annual NOSPlan Convention, LPU welcomed over 600 participants from 19 top institutes. Themed “Dakshatva,” the convention focused on sustainability and innovation in urban development, featuring over 20 events that fostered collaboration and competition among future urban planners. The event included workshops, panel discussions, and competitions, providing a platform for students to showcase their skills and knowledge in sustainable planning. The convention aimed to inspire the next generation of planners to address pressing urban challenges and promote sustainable practices.",
+    image: "/placeholder.svg?height=400&width=800",
+    capacity: 200,
+    registered: 160,
+    status: "upcoming",
+    category: "networking",
+  },
+  {
+    id: "9",
+    title: "Gear Up Season-3 Hackathon",
+    date: "October 1, 2024",
+    time: "36-hour event​",
+    location: "LPU Campus​",
+    description:
+      "Organized by the Department of Student Research and Projects, this hackathon aimed to inspire innovation and address societal challenges. With 250 teams participating, the event served as a precursor to the Smart India Hackathon 2024, encouraging students to develop novel solutions in categories like healthcare, sustainability, and education technology. The event featured workshops, mentorship sessions, and networking opportunities with industry experts, fostering collaboration and knowledge exchange.",
+    image: "/placeholder.svg?height=400&width=800",
+    capacity: 200,
+    registered: 160,
+    status: "upcoming",
+    category: "special",
+  },
+  {
+    id: "10",
+    title: "Social Responsibility & Sustainability Events ",
     date: "October 18, 2025",
     time: "10:00 AM - 12:00 PM",
     location: "University Gardens",
@@ -146,7 +176,7 @@ const EVENTS_DATA: Event[] = [
     capacity: 200,
     registered: 160,
     status: "upcoming",
-    category: "social",
+    category: "special",
   },
 ]
 
@@ -216,10 +246,10 @@ export default function EventsPage() {
             <TabsContent value="all" className="mt-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-heading font-semibold">All Homecoming Events</h2>
-                <Button variant="outline" size="sm" className="flex items-center gap-2">
-                  <Download className="h-4 w-4" />
-                  Download Schedule
-                </Button>
+                {/* <Button variant="outline" size="sm" className="flex items-center gap-2"> */}
+                  {/* <Download className="h-4 w-4" /> */}
+                  
+                {/* </Button> */}
               </div>
 
               <motion.div className="space-y-6" variants={container} initial="hidden" animate="show">
@@ -255,9 +285,9 @@ export default function EventsPage() {
                             <h3 className="font-heading text-xl font-bold">{event.title}</h3>
                             <div className="flex items-center gap-1 text-sm">
                               <Users className="h-4 w-4 text-muted-foreground" />
-                              <span>
-                                {event.registered}/{event.capacity}
-                              </span>
+                                <span>
+                                {event.registered}
+                                </span>
                               <span className="text-muted-foreground ml-1">registered</span>
                             </div>
                           </div>
@@ -280,10 +310,10 @@ export default function EventsPage() {
                           <p className="text-muted-foreground mb-6 line-clamp-2">{event.description}</p>
 
                           <div className="flex flex-col sm:flex-row gap-3">
-                            <Button variant="outline" onClick={() => setSelectedEvent(event)}>
+                            <Button variant="outline" onClick={() => setSelectedEvent(event)} className="gradient-primary">
                               View Details
                             </Button>
-                            <Button
+                            {/* <Button
                               className="gradient-primary"
                               onClick={() => {
                                 setSelectedEvent(event)
@@ -292,7 +322,7 @@ export default function EventsPage() {
                               disabled={event.registered >= event.capacity}
                             >
                               {event.registered >= event.capacity ? "Fully Booked" : "RSVP Now"}
-                            </Button>
+                            </Button> */}
                           </div>
                         </div>
                       </div>
@@ -352,10 +382,10 @@ export default function EventsPage() {
                           <p className="text-muted-foreground mb-6 line-clamp-2">{event.description}</p>
 
                           <div className="flex flex-col sm:flex-row gap-3">
-                            <Button variant="outline" onClick={() => setSelectedEvent(event)}>
+                            <Button variant="outline" onClick={() => setSelectedEvent(event)} className="gradient-primary">
                               View Details
                             </Button>
-                            <Button
+                            {/* <Button
                               className="gradient-primary"
                               onClick={() => {
                                 setSelectedEvent(event)
@@ -364,7 +394,7 @@ export default function EventsPage() {
                               disabled={event.registered >= event.capacity}
                             >
                               {event.registered >= event.capacity ? "Fully Booked" : "RSVP Now"}
-                            </Button>
+                            </Button> */}
                           </div>
                         </div>
                       </div>
@@ -425,10 +455,10 @@ export default function EventsPage() {
                           <p className="text-muted-foreground mb-6 line-clamp-2">{event.description}</p>
 
                           <div className="flex flex-col sm:flex-row gap-3">
-                            <Button variant="outline" onClick={() => setSelectedEvent(event)}>
+                            <Button variant="outline" onClick={() => setSelectedEvent(event)} className="gradient-primary">
                               View Details
                             </Button>
-                            <Button
+                            {/* <Button
                               className="gradient-primary"
                               onClick={() => {
                                 setSelectedEvent(event)
@@ -437,7 +467,7 @@ export default function EventsPage() {
                               disabled={event.registered >= event.capacity}
                             >
                               {event.registered >= event.capacity ? "Fully Booked" : "RSVP Now"}
-                            </Button>
+                            </Button> */}
                           </div>
                         </div>
                       </div>
@@ -496,10 +526,10 @@ export default function EventsPage() {
                           <p className="text-muted-foreground mb-6 line-clamp-2">{event.description}</p>
 
                           <div className="flex flex-col sm:flex-row gap-3">
-                            <Button variant="outline" onClick={() => setSelectedEvent(event)}>
+                            <Button variant="outline" onClick={() => setSelectedEvent(event)} className="gradient-primary">
                               View Details
                             </Button>
-                            <Button
+                            {/* <Button
                               className="gradient-primary"
                               onClick={() => {
                                 setSelectedEvent(event)
@@ -508,7 +538,7 @@ export default function EventsPage() {
                               disabled={event.registered >= event.capacity}
                             >
                               {event.registered >= event.capacity ? "Fully Booked" : "RSVP Now"}
-                            </Button>
+                            </Button> */}
                           </div>
                         </div>
                       </div>
@@ -567,10 +597,10 @@ export default function EventsPage() {
                           <p className="text-muted-foreground mb-6 line-clamp-2">{event.description}</p>
 
                           <div className="flex flex-col sm:flex-row gap-3">
-                            <Button variant="outline" onClick={() => setSelectedEvent(event)}>
+                            <Button variant="outline" onClick={() => setSelectedEvent(event)} className="gradient-primary">
                               View Details
                             </Button>
-                            <Button
+                            {/* <Button
                               className="gradient-primary"
                               onClick={() => {
                                 setSelectedEvent(event)
@@ -579,7 +609,7 @@ export default function EventsPage() {
                               disabled={event.registered >= event.capacity}
                             >
                               {event.registered >= event.capacity ? "Fully Booked" : "RSVP Now"}
-                            </Button>
+                            </Button> */}
                           </div>
                         </div>
                       </div>
@@ -640,27 +670,27 @@ export default function EventsPage() {
                 <p className="text-muted-foreground">{selectedEvent.description}</p>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
-                <div className="flex items-center gap-2">
+              {/* <div className="flex items-center justify-between p-4 bg-muted rounded-lg"> */}
+                {/* <div className="flex items-center gap-2">
                   <Users className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="text-sm font-medium">Capacity</p>
-                    <p className="text-sm text-muted-foreground">
-                      {selectedEvent.registered} registered out of {selectedEvent.capacity} spots
-                    </p>
+                  <p className="text-sm font-medium">Capacity</p>
+                  <p className="text-sm text-muted-foreground">
+                    {selectedEvent.registered} registered out of {selectedEvent.capacity} spots
+                  </p>
                   </div>
-                </div>
-                <div className="w-32 h-2 bg-muted-foreground/20 rounded-full overflow-hidden">
+                </div> */}
+                {/* <div className="w-32 h-2 bg-muted-foreground/20 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-primary rounded-full"
                     style={{ width: `${(selectedEvent.registered / selectedEvent.capacity) * 100}%` }}
                   />
-                </div>
-              </div>
+                </div> */}
+              {/* </div> */}
             </div>
 
             <DialogFooter>
-              <Button variant="outline" onClick={() => setSelectedEvent(null)}>
+              {/* <Button variant="outline" onClick={() => setSelectedEvent(null)}>
                 Close
               </Button>
               <Button
@@ -669,7 +699,7 @@ export default function EventsPage() {
                 disabled={selectedEvent.registered >= selectedEvent.capacity}
               >
                 {selectedEvent.registered >= selectedEvent.capacity ? "Fully Booked" : "RSVP Now"}
-              </Button>
+              </Button> */}
             </DialogFooter>
           </DialogContent>
         )}

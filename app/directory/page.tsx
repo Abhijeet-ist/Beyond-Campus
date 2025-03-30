@@ -359,44 +359,52 @@ export default function DirectoryPage() {
               animate="show"
             >
               {filteredAlumni.map((alumni) => (
-                <motion.div key={alumni.id} variants={item}>
-                  <Card
-                    className="h-full overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
-                    onClick={() => setSelectedProfile(alumni)}
-                  >
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={alumni.image || "/placeholder.svg"}
-                        alt={alumni.name}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                    <CardContent className="p-5">
-                      <h3 className="font-heading text-xl font-bold mb-1">{alumni.name}</h3>
-                      <p className="text-primary text-sm mb-2">Class of {alumni.graduation}</p>
+              <motion.div 
+                key={alumni.id} 
+                variants={item}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Card
+                className="h-full overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group relative"
+                onClick={() => setSelectedProfile(alumni)}
+                >
+                {/* Hover effect from behind */}
+                <span className="absolute inset-0 bg-primary/10 origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
+                
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                  src={alumni.image || "/placeholder.svg"}
+                  alt={alumni.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <CardContent className="p-5 relative">
+                  <h3 className="font-heading text-xl font-bold mb-1">{alumni.name}</h3>
+                  <p className="text-primary text-sm mb-2">Class of {alumni.graduation}</p>
 
-                      <div className="flex flex-col gap-2 mb-4">
-                        <div className="flex items-start gap-2">
-                          <Briefcase className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">
-                            {alumni.role} at {alumni.company}
-                          </span>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <MapPin className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">{alumni.location}</span>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <GraduationCap className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">{alumni.degree}</span>
-                        </div>
-                      </div>
+                  <div className="flex flex-col gap-2 mb-4">
+                  <div className="flex items-start gap-2">
+                    <Briefcase className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">
+                    {alumni.role} at {alumni.company}
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <MapPin className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">{alumni.location}</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <GraduationCap className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">{alumni.degree}</span>
+                  </div>
+                  </div>
 
-                      <Badge variant="outline">{alumni.industry}</Badge>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                  <Badge variant="outline">{alumni.industry}</Badge>
+                </CardContent>
+                </Card>
+              </motion.div>
               ))}
             </motion.div>
           ) : (
