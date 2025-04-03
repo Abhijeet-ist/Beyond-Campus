@@ -45,7 +45,7 @@ const EVENTS_DATA: Event[] = [
     location: "Main Campus",
     description:
       "The 12th edition of 'One India' transformed the campus into a vibrant tapestry of Indian culture and heritage. Embracing the theme \"Equality, Diversity, and Inclusivity,\" over 4,000 students from various states and union territories showcased festivals, rituals, dances, and songs, fostering a spirit of unity amidst diversity. The event featured 29 exhibition stalls and a 3 km-long cultural procession.",
-    image: "/placeholder.svg?height=400&width=800",
+    image: "/LPU alumini.jpg",
     capacity: 200,
     registered: 145,
     attendees: "25,000+",
@@ -60,7 +60,7 @@ const EVENTS_DATA: Event[] = [
     location: "LPU Campus​",
     description:
       "The 17th edition of 'Spectra' ignited the campus with vibrant expressions of youth talent and social consciousness. Thousands of students from over 25 disciplines participated in more than 30 competitions across music, dance, drama, visual arts, and technology. Performances addressed pressing social issues, blending art with activism and inspiring change.",
-    image: "/placeholder.svg?height=400&width=800",
+    image: "/LPU alumini.jpg",
     capacity: 100,
     registered: 78,
     status: "upcoming",
@@ -74,7 +74,7 @@ const EVENTS_DATA: Event[] = [
     location: "LPU Campus",
     description:
       "Magnitude 2024' provided a platform for students to exhibit creativity and innovation across categories like Literary, Technical, Fine Arts, Cultural, and Lifestyle. The event introduced a mentorship program with eight dynamic teams and featured competitions such as Soundscape, Voice of Magnitude, and Mag Gala. The grand finale was graced by renowned singer Swati Mishra.​",
-    image: "/placeholder.svg?height=400&width=800",
+    image: "/LPU alumini.jpg",
     capacity: 150,
     registered: 132,
     status: "upcoming",
@@ -82,13 +82,13 @@ const EVENTS_DATA: Event[] = [
   },
   {
     id: "4",
-    title: "Cognitia’25 – Annual Technical Fest",
+    title: "Cognitia'25 – Annual Technical Fest",
     date: "March 13, 2025",
     time: "Three-day event",
     location: "University Auditorium",
     description:
-      "Cognitia’25' celebrated technical challenges and innovations, featuring 14 specialized competitions. Highlights included 'Ignition Quest' (Model Rocketry Competition) and 'Aero Rush' (Drone Racing Competition). Over 450 teams showcased engineering prowess, problem-solving skills, and creative ingenuity.​ The event fostered collaboration and networking among students, faculty, and industry experts, making it a hub of knowledge exchange and inspiration.",
-    image: "/placeholder.svg?height=400&width=800",
+      "Cognitia'25' celebrated technical challenges and innovations, featuring 14 specialized competitions. Highlights included 'Ignition Quest' (Model Rocketry Competition) and 'Aero Rush' (Drone Racing Competition). Over 450 teams showcased engineering prowess, problem-solving skills, and creative ingenuity.​ The event fostered collaboration and networking among students, faculty, and industry experts, making it a hub of knowledge exchange and inspiration.",
+    image: "/LPU alumini.jpg",
     capacity: 300,
     registered: 210,
     status: "upcoming",
@@ -102,7 +102,7 @@ const EVENTS_DATA: Event[] = [
     location: "LPU Campus​",
     description:
       "LPU clinched the overall championship for the second consecutive year at this prestigious festival. The event saw participation from over 2,400 students representing 148 universities, competing in 28 events across theatre, music, literary, and fine arts categories. LPU's stellar performances earned 18 medals, including 10 golds. The festival was inaugurated by the Chief Minister of Punjab, Bhagwant Mann, and featured a grand cultural evening with performances by renowned artists.",
-    image: "/placeholder.svg?height=400&width=800",
+    image: "/LPU alumini.jpg",
     capacity: 250,
     registered: 220,
     status: "upcoming",
@@ -116,7 +116,7 @@ const EVENTS_DATA: Event[] = [
     location: "Shanti Devi Mittal Auditorium, LPU",
     description:
       "The fifth edition of NICHE brought together over 25 global and national leaders in architecture from countries like the USA, UK, and Spain. The conference aimed to converge fields of planning, architecture, and design, fostering discussions on sustainable and habitable environments. The event featured keynote speeches, panel discussions, and workshops, providing a platform for knowledge exchange and collaboration among professionals and students.",
-    image: "/placeholder.svg?height=400&width=800",
+    image: "/LPU alumini.jpg",
     capacity: 120,
     registered: 85,
     status: "upcoming",
@@ -130,7 +130,7 @@ const EVENTS_DATA: Event[] = [
     location: "LPU Campus",
     description:
       "LPU had the honor of hosting the 65th Annual NASA (National Association of Students of Architecture) Convention, a prestigious gathering that brought together architecture students and professionals from across the nation. The convention featured a series of workshops, lectures by eminent architects, design competitions, and exhibitions, fostering a collaborative environment for innovation and learning in the field of architecture. The event aimed to inspire and empower the next generation of architects, encouraging them to explore new ideas and approaches in design and sustainability.",
-    image: "/placeholder.svg?height=400&width=800",
+    image: "/LPU alumini.jpg",
     capacity: 500,
     registered: 450,
     status: "upcoming",
@@ -143,8 +143,8 @@ const EVENTS_DATA: Event[] = [
     time: "Three-day convention",
     location: "LPU Campus​",
     description:
-      " Hosting the 26th Annual NOSPlan Convention, LPU welcomed over 600 participants from 19 top institutes. Themed “Dakshatva,” the convention focused on sustainability and innovation in urban development, featuring over 20 events that fostered collaboration and competition among future urban planners. The event included workshops, panel discussions, and competitions, providing a platform for students to showcase their skills and knowledge in sustainable planning. The convention aimed to inspire the next generation of planners to address pressing urban challenges and promote sustainable practices.",
-    image: "/placeholder.svg?height=400&width=800",
+      " Hosting the 26th Annual NOSPlan Convention, LPU welcomed over 600 participants from 19 top institutes. Themed Dakshatva, the convention focused on sustainability and innovation in urban development, featuring over 20 events that fostered collaboration and competition among future urban planners. The event included workshops, panel discussions, and competitions, providing a platform for students to showcase their skills and knowledge in sustainable planning. The convention aimed to inspire the next generation of planners to address pressing urban challenges and promote sustainable practices.",
+    image: "/LPU alumini.jpg",
     capacity: 200,
     registered: 160,
     status: "upcoming",
@@ -158,7 +158,7 @@ const EVENTS_DATA: Event[] = [
     location: "LPU Campus​",
     description:
       "Organized by the Department of Student Research and Projects, this hackathon aimed to inspire innovation and address societal challenges. With 250 teams participating, the event served as a precursor to the Smart India Hackathon 2024, encouraging students to develop novel solutions in categories like healthcare, sustainability, and education technology. The event featured workshops, mentorship sessions, and networking opportunities with industry experts, fostering collaboration and knowledge exchange.",
-    image: "/placeholder.svg?height=400&width=800",
+    image: "/LPU alumini.jpg",
     capacity: 200,
     registered: 160,
     status: "upcoming",
@@ -172,7 +172,7 @@ const EVENTS_DATA: Event[] = [
     location: "University Gardens",
     description:
       "Conclude the homecoming weekend with a relaxed brunch in the beautiful University Gardens. Share memories from the weekend and exchange contact information with new and old friends before departing.",
-    image: "/placeholder.svg?height=400&width=800",
+    image: "/LPU alumini.jpg",
     capacity: 200,
     registered: 160,
     status: "upcoming",
