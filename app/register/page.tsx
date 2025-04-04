@@ -4,8 +4,9 @@ import type React from "react"
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { Eye, EyeOff, ArrowRight, Check } from "lucide-react"
+import { Eye, EyeOff, ArrowRight, Check, Loader2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,10 +15,15 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { toast } from "@/components/ui/use-toast"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
   const [step, setStep] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -35,6 +41,7 @@ export default function RegisterPage() {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }))
+    setError(null)
   }
 
   const handleSelectChange = (name: string, value: string) => {
@@ -42,20 +49,85 @@ export default function RegisterPage() {
       ...prev,
       [name]: value,
     }))
+    setError(null)
   }
 
   const nextStep = () => {
+    // Basic validation for step 1
+    if (step === 1) {
+      if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
+        setError("Please fill out all required fields")
+        return
+      }
+
+      if (formData.password.length < 8 ||
+        !/\d/.test(formData.password) ||
+        !/[!@#$%^&*(),.?":{}|<>]/.test(formData.password)) {
+        setError("Password must be at least 8 characters and include a number and special character")
+        return
+      }
+    }
+
+    // Basic validation for step 2
+    if (step === 2) {
+      if (!formData.graduationYear || !formData.degree) {
+        setError("Please select graduation year and degree")
+        return
+      }
+    }
+
+    setError(null)
     setStep((prev) => prev + 1)
   }
 
   const prevStep = () => {
+    setError(null)
     setStep((prev) => prev - 1)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log(formData)
+
+    if (!formData.agreeTerms) {
+      setError("You must agree to the Terms of Service and Privacy Policy")
+      return
+    }
+
+    try {
+      setIsLoading(true)
+      setError(null)
+
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Registration failed")
+      }
+
+      // Show success message
+      toast({
+        title: "Registration successful!",
+        description: "Your account has been created. Redirecting to login...",
+      })
+
+      // Redirect to login page after a short delay
+      setTimeout(() => {
+        router.push("/login")
+      }, 2000)
+
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again.")
+      console.error("Registration error:", err)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -70,18 +142,23 @@ export default function RegisterPage() {
               <p className="text-muted-foreground">Join our alumni community to access exclusive benefits</p>
             </div>
 
+            {error && (
+              <Alert variant="destructive" className="mb-6">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
             <div className="mb-8">
               <div className="flex justify-between">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="flex flex-col items-center">
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
-                        step > i
+                      className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${step > i
                           ? "bg-primary text-white"
                           : step === i
                             ? "border-2 border-primary text-primary"
                             : "border-2 border-muted-foreground text-muted-foreground"
-                      }`}
+                        }`}
                     >
                       {step > i ? <Check className="h-5 w-5" /> : i}
                     </div>
@@ -301,11 +378,22 @@ export default function RegisterPage() {
                   </div>
 
                   <div className="flex justify-between gap-4">
-                    <Button type="button" variant="outline" onClick={prevStep}>
+                    <Button type="button" variant="outline" onClick={prevStep} disabled={isLoading}>
                       Back
                     </Button>
-                    <Button type="submit" className="flex-1 gradient-primary" disabled={!formData.agreeTerms}>
-                      Create Account
+                    <Button
+                      type="submit"
+                      className="flex-1 gradient-primary"
+                      disabled={!formData.agreeTerms || isLoading}
+                    >
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Creating Account...
+                        </>
+                      ) : (
+                        <>Create Account</>
+                      )}
                     </Button>
                   </div>
                 </motion.div>
@@ -328,4 +416,3 @@ export default function RegisterPage() {
     </>
   )
 }
-

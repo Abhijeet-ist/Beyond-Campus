@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff, Loader2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,9 +13,100 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { toast } from "@/components/ui/use-toast"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function LoginPage() {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<"email" | "id">("email")
+
+  const [formData, setFormData] = useState({
+    email: "",
+    alumniId: "",
+    password: "",
+    remember: false
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }))
+    setError(null)
+  }
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value as "email" | "id")
+    setError(null)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    try {
+      setIsLoading(true)
+      setError(null)
+
+      // Validate form data
+      if (activeTab === "email" && !formData.email) {
+        setError("Please enter your email address")
+        return
+      }
+
+      if (activeTab === "id" && !formData.alumniId) {
+        setError("Please enter your Alumni ID")
+        return
+      }
+
+      if (!formData.password) {
+        setError("Please enter your password")
+        return
+      }
+
+      // Prepare request data
+      const requestData = {
+        loginType: activeTab,
+        email: formData.email,
+        alumniId: formData.alumniId,
+        password: formData.password,
+        remember: formData.remember
+      }
+
+      // Send login request
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed")
+      }
+
+      // Show success message
+      toast({
+        title: "Login successful!",
+        description: `Welcome back, ${data.user.firstName}!`,
+      })
+
+      // Redirect to dashboard page
+      router.push("/dashboard")
+
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again.")
+      console.error("Login error:", err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <>
@@ -28,17 +120,31 @@ export default function LoginPage() {
               <p className="text-muted-foreground">Sign in to access your alumni account</p>
             </div>
 
-            <Tabs defaultValue="email" className="w-full">
+            {error && (
+              <Alert variant="destructive" className="mb-6">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <Tabs defaultValue="email" value={activeTab} onValueChange={handleTabChange} className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-6">
                 <TabsTrigger value="email">Email</TabsTrigger>
                 <TabsTrigger value="id">Alumni ID</TabsTrigger>
               </TabsList>
 
               <TabsContent value="email">
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" type="email" placeholder="your.email@example.com" />
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="your.email@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      disabled={isLoading}
+                    />
                   </div>
 
                   <div className="space-y-2">
@@ -49,13 +155,22 @@ export default function LoginPage() {
                       </Link>
                     </div>
                     <div className="relative">
-                      <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" />
+                      <Input
+                        id="password"
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        value={formData.password}
+                        onChange={handleChange}
+                        disabled={isLoading}
+                      />
                       <Button
                         type="button"
                         variant="ghost"
                         size="icon"
                         className="absolute right-0 top-0 h-full px-3"
                         onClick={() => setShowPassword(!showPassword)}
+                        disabled={isLoading}
                       >
                         {showPassword ? (
                           <EyeOff className="h-4 w-4 text-muted-foreground" />
@@ -68,23 +183,45 @@ export default function LoginPage() {
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="remember" />
+                    <Checkbox
+                      id="remember"
+                      name="remember"
+                      checked={formData.remember}
+                      onCheckedChange={(checked) =>
+                        setFormData(prev => ({ ...prev, remember: !!checked }))
+                      }
+                      disabled={isLoading}
+                    />
                     <Label htmlFor="remember" className="text-sm font-normal">
                       Remember me for 30 days
                     </Label>
                   </div>
 
-                  <Button type="submit" className="w-full gradient-primary">
-                    Sign In
+                  <Button type="submit" className="w-full gradient-primary" disabled={isLoading}>
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Signing In...
+                      </>
+                    ) : (
+                      <>Sign In</>
+                    )}
                   </Button>
                 </form>
               </TabsContent>
 
               <TabsContent value="id">
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="space-y-2">
                     <Label htmlFor="alumni-id">Alumni ID</Label>
-                    <Input id="alumni-id" placeholder="e.g. ALM-12345" />
+                    <Input
+                      id="alumni-id"
+                      name="alumniId"
+                      placeholder="e.g. ALM-12345"
+                      value={formData.alumniId}
+                      onChange={handleChange}
+                      disabled={isLoading}
+                    />
                   </div>
 
                   <div className="space-y-2">
@@ -95,13 +232,22 @@ export default function LoginPage() {
                       </Link>
                     </div>
                     <div className="relative">
-                      <Input id="id-password" type={showPassword ? "text" : "password"} placeholder="••••••••" />
+                      <Input
+                        id="id-password"
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        value={formData.password}
+                        onChange={handleChange}
+                        disabled={isLoading}
+                      />
                       <Button
                         type="button"
                         variant="ghost"
                         size="icon"
                         className="absolute right-0 top-0 h-full px-3"
                         onClick={() => setShowPassword(!showPassword)}
+                        disabled={isLoading}
                       >
                         {showPassword ? (
                           <EyeOff className="h-4 w-4 text-muted-foreground" />
@@ -114,14 +260,29 @@ export default function LoginPage() {
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="remember-id" />
+                    <Checkbox
+                      id="remember-id"
+                      name="remember"
+                      checked={formData.remember}
+                      onCheckedChange={(checked) =>
+                        setFormData(prev => ({ ...prev, remember: !!checked }))
+                      }
+                      disabled={isLoading}
+                    />
                     <Label htmlFor="remember-id" className="text-sm font-normal">
                       Remember me for 30 days
                     </Label>
                   </div>
 
-                  <Button type="submit" className="w-full gradient-primary">
-                    Sign In
+                  <Button type="submit" className="w-full gradient-primary" disabled={isLoading}>
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Signing In...
+                      </>
+                    ) : (
+                      <>Sign In</>
+                    )}
                   </Button>
                 </form>
               </TabsContent>
@@ -146,7 +307,7 @@ export default function LoginPage() {
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-4">
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" type="button" disabled={isLoading}>
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -167,7 +328,7 @@ export default function LoginPage() {
                 </svg>
                 Google
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" type="button" disabled={isLoading}>
                 <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                 </svg>
@@ -182,4 +343,3 @@ export default function LoginPage() {
     </>
   )
 }
-
