@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
 import { verify } from 'jsonwebtoken'
 
 // Define which routes require authentication
-const protectedRoutes = ['/dashboard', '/profile', '/events']
+const protectedRoutes = ['/profile']
 
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl
@@ -47,9 +47,9 @@ export async function middleware(request: NextRequest) {
 // Configure middleware to only run on specific paths
 export const config = {
     matcher: [
-        '/dashboard/:path*',
+        // '/dashboard/:path*',
         '/profile/:path*',
-        '/events/:path*',
+        // '/events/:path*',
         '/api/protected/:path*'
     ],
 }
