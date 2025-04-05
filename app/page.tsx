@@ -1,5 +1,6 @@
 "use client"
 
+
 import { useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -15,7 +16,9 @@ import { TextReveal } from "@/components/text-reveal"
 import { CountdownTimer } from "@/components/countdown-timer"
 import { MagneticButton } from "@/components/magnetic-button"
 import { AlumniSpotlight } from "@/components/alumni-spotlight"
+import { SpotlightEffect } from "@/components/spotlight-effect"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
 
 export default function Home() {
   const targetRef = useRef<HTMLDivElement>(null)
@@ -38,164 +41,170 @@ export default function Home() {
 
       <main className="relative">
         {/* Hero Section */}
-        <section
-          ref={targetRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero"
-        >
-          <motion.div className="absolute inset-0 z-0" style={{ y, opacity }} />
+        <SpotlightEffect size={400} intensity="medium" className="w-full">
+          <section
+            ref={targetRef}
+            className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero"
+          >
+            <motion.div className="absolute inset-0 z-0" style={{ y, opacity }} />
 
-          <div className="container relative z-10 pt-20 pb-16 md:py-24 lg:py-32">
-            <div className="max-w-4xl mx-auto text-center">
-                <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.5 }}
+            <div className="container relative z-10 pt-20 pb-16 md:py-24 lg:py-32">
+              <div className="max-w-4xl mx-auto text-center">
+                  <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  transition={{ duration: 0.5 }}
+                  >
+                  <span className="inline-block px-6 py-2.5 mb-8 rounded-full text-sm font-semibold uppercase tracking-wider bg-gradient-to-r from-primary/40 to-primary/70 text-white border border-primary/50 shadow-glow backdrop-blur-sm">
+                    Alumni Homecoming 2025
+                  </span>
+                  </motion.div>
+
+                  <TextReveal
+                  text="Reconnect, Reminisce, and Celebrate Your Legacy"
+                  className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 text-center"
+                  delay={0.2}
+                  />
+
+                <motion.p
+                  className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
                 >
-                <span className="inline-block px-6 py-2.5 mb-8 rounded-full text-sm font-semibold uppercase tracking-wider bg-gradient-to-r from-primary/40 to-primary/70 text-white border border-primary/50 shadow-glow backdrop-blur-sm">
-                  Alumni Homecoming 2025
-                </span>
-                </motion.div>
-
-                <TextReveal
-                text="Reconnect, Reminisce, and Celebrate Your Legacy"
-                className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 text-center"
-                delay={0.2}
-                />
-
-              <motion.p
-                className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-              >
-                Join fellow alumni for an unforgettable weekend of nostalgia, networking, and new memories at our
-                exclusive homecoming celebration.
-              </motion.p>
-
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-              >
-                <MagneticButton className="gradient-primary text-white px-8 py-3 rounded-full">
-                  <Link href="/register" className="flex items-center gap-2">
-                    Register Now <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </MagneticButton>
-
-                <MagneticButton className="glass-pane px-8 py-3 rounded-full">
-                  <Link href="/events">View Schedule</Link>
-                </MagneticButton>
-              </motion.div>
+                  Join fellow alumni for an unforgettable weekend of nostalgia, networking, and new memories at our
+                  exclusive homecoming celebration.
+                </motion.p>
 
                 <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.5 }}
+                  className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
                 >
-                <h2 className="text-xl md:text-2xl font-heading font-bold mb-6">Homecoming Countdown</h2>
-                <CountdownTimer targetDate={new Date("2025-04-10")} />
+                  <MagneticButton className="gradient-primary text-white px-8 py-3 rounded-full">
+                    <Link href="/register" className="flex items-center gap-2">
+                      Register Now <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </MagneticButton>
+
+                  <MagneticButton className="glass-pane px-8 py-3 rounded-full">
+                    <Link href="/events">View Schedule</Link>
+                  </MagneticButton>
                 </motion.div>
+
+                  <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1, duration: 0.5 }}
+                  >
+                  <h2 className="text-xl md:text-2xl font-heading font-bold mb-6">Homecoming Countdown</h2>
+                  <CountdownTimer targetDate={new Date("2025-04-10")} />
+                  </motion.div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </SpotlightEffect>
 
         {/* Event Highlights */}
-        <section className="py-16 md:py-24 lg:py-32">
-          <div className="container">
-            <div className="text-center mb-12 md:mb-16">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full text-xs font-medium uppercase tracking-wider bg-primary/10 text-primary">
-                What to Expect
-              </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Event Highlights</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                From nostalgic campus tours to exclusive networking opportunities, our homecoming weekend is packed with
-                memorable experiences.
-              </p>
-            </div>
+        <SpotlightEffect size={350} intensity="medium" className="w-full">
+          <section className="py-16 md:py-24 lg:py-32">
+            <div className="container">
+              <div className="text-center mb-12 md:mb-16">
+                <span className="inline-block px-4 py-1.5 mb-4 rounded-full text-xs font-medium uppercase tracking-wider bg-primary/10 text-primary">
+                  What to Expect
+                </span>
+                <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Event Highlights</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  From nostalgic campus tours to exclusive networking opportunities, our homecoming weekend is packed with
+                  memorable experiences.
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {[
-                {
-                  title: "Alumni Homecoming 2023",
-                  description: "The event emphasized the enduring bonds between alumni and LPU, showcasing the university's role in shaping successful careers across diverse fields",
-                  icon: <Users className="h-6 w-6" />,
-                  date: "March 25, 2023",
-                  location: "Shanti Devi Mittal Auditorium",
-                },
-                {
-                  title: "Alumni Homecoming 2024",
-                  description: "The event concluded with an Alumni Tree Plantation Drive at Uniplaza, symbolizing the deep-rooted connection between alumni and LPU.",
-                  icon: <MapPin className="h-6 w-6" />,
-                  date: "April 2024",
-                  location: "Shanti Devi Mittal Auditorium",
-                },
-                {
-                  title: "Alumni Homecoming 2025",
-                  description: "LPU continues to host alumni-centric activities such as virtual meets for various schools and chapters worldwide. The next major Alumni Homecoming is scheduled for April 2025",
-                  icon: <Calendar className="h-6 w-6" />,
-                  date: "April 10, 2025",
-                  location: "Shanti Devi Mittal Auditorium",
-                },
-              ].map((event, index) => (
-                <Card key={index} className="overflow-hidden border-none glass-pane">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center mb-4">
-                      {event.icon}
-                    </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">{event.title}</h3>
-                    <p className="text-muted-foreground mb-4">{event.description}</p>
-                    <div className="flex flex-col gap-2 text-sm">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-primary" />
-                        <span>{event.date}</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {[
+                  {
+                    title: "Alumni Homecoming 2023",
+                    description: "The event emphasized the enduring bonds between alumni and LPU, showcasing the university's role in shaping successful careers across diverse fields",
+                    icon: <Users className="h-6 w-6" />,
+                    date: "March 25, 2023",
+                    location: "Shanti Devi Mittal Auditorium",
+                  },
+                  {
+                    title: "Alumni Homecoming 2024",
+                    description: "The event concluded with an Alumni Tree Plantation Drive at Uniplaza, symbolizing the deep-rooted connection between alumni and LPU.",
+                    icon: <MapPin className="h-6 w-6" />,
+                    date: "April 2024",
+                    location: "Shanti Devi Mittal Auditorium",
+                  },
+                  {
+                    title: "Alumni Homecoming 2025",
+                    description: "LPU continues to host alumni-centric activities such as virtual meets for various schools and chapters worldwide. The next major Alumni Homecoming is scheduled for April 2025",
+                    icon: <Calendar className="h-6 w-6" />,
+                    date: "April 10, 2025",
+                    location: "Shanti Devi Mittal Auditorium",
+                  },
+                ].map((event, index) => (
+                  <Card key={index} className="overflow-hidden border-none glass-pane">
+                    <CardContent className="p-6">
+                      <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center mb-4">
+                        {event.icon}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-primary" />
-                        <span>{event.location}</span>
+                      <h3 className="text-xl font-heading font-bold mb-2">{event.title}</h3>
+                      <p className="text-muted-foreground mb-4">{event.description}</p>
+                      <div className="flex flex-col gap-2 text-sm">
+                        <div className="flex items-center gap-2">
+                          <Calendar className="h-4 w-4 text-primary" />
+                          <span>{event.date}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin className="h-4 w-4 text-primary" />
+                          <span>{event.location}</span>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
 
-            <div className="text-center mt-10">
-              <Button asChild variant="outline" className="rounded-full">
-                <Link href="/events">
-                  View Full Schedule <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <div className="text-center mt-10">
+                <Button asChild variant="outline" className="rounded-full">
+                  <Link href="/events">
+                    View Full Schedule <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </SpotlightEffect>
 
         {/* Alumni Spotlight */}
-        <section className="py-16 md:py-24 lg:py-32 bg-muted">
-          <div className="container">
-            <div className="text-center mb-12 md:mb-16">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full text-xs font-medium uppercase tracking-wider bg-primary/10 text-primary">
-                Alumni Stories
-              </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Alumni Spotlight</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Hear from distinguished alumni about their journey since graduation and the impact of their university
-                experience.
-              </p>
-            </div>
+        <SpotlightEffect size={350} intensity="medium" className="w-full">
+          <section className="py-16 md:py-24 lg:py-32 bg-muted">
+            <div className="container">
+              <div className="text-center mb-12 md:mb-16">
+                <span className="inline-block px-4 py-1.5 mb-4 rounded-full text-xs font-medium uppercase tracking-wider bg-primary/10 text-primary">
+                  Alumni Stories
+                </span>
+                <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Alumni Spotlight</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Hear from distinguished alumni about their journey since graduation and the impact of their university
+                  experience.
+                </p>
+              </div>
 
-            <AlumniSpotlight />
+              <AlumniSpotlight />
 
-            <div className="text-center mt-10">
-              <Button asChild variant="outline" className="rounded-full">
-                <Link href="/directory">
-                  Explore Alumni Directory <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <div className="text-center mt-10">
+                <Button asChild variant="outline" className="rounded-full">
+                  <Link href="/directory">
+                    Explore Alumni Directory <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </SpotlightEffect>
 
         {/* Registration CTA */}
         {/* <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden">

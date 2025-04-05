@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
-import { sign } from 'jsonwebtoken';
+// import { sign } from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-default-jwt-secret-key';
 
@@ -45,16 +45,16 @@ export async function POST(request: Request) {
         }
 
         // Generate JWT token
-        const token = sign(
-            {
-                userId: user._id,
-                email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName
-            },
-            JWT_SECRET,
-            { expiresIn: remember ? '30d' : '24h' }
-        );
+        // const token = sign(
+        //     {
+        //         userId: user._id,
+        //         email: user.email,
+        //         firstName: user.firstName,
+        //         lastName: user.lastName
+        //     },
+        //     JWT_SECRET,
+        //     { expiresIn: remember ? '30d' : '24h' }
+        // );
 
         // Set cookie
         const cookieOptions = {
@@ -66,20 +66,20 @@ export async function POST(request: Request) {
         };
 
         // Set cookie in the response
-        cookies().set('token', token, cookieOptions);
+        // cookies().set('token', token, cookieOptions);
 
-        // Return success response
-        return NextResponse.json({
-            message: 'Login successful',
-            user: {
-                id: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                graduationYear: user.graduationYear,
-                degree: user.degree
-            }
-        });
+        // // Return success response
+        // return NextResponse.json({
+        //     message: 'Login successful',
+        //     user: {
+        //         id: user._id,
+        //         firstName: user.firstName,
+        //         lastName: user.lastName,
+        //         email: user.email,
+        //         graduationYear: user.graduationYear,
+        //         degree: user.degree
+        //     }
+        // });
 
     } catch (error) {
         console.error('Login error:', error);
